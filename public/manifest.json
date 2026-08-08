@@ -1,0 +1,29 @@
+{
+  "short_name": "SomLuul",
+  "name": "SomLuul",
+  "icons": [
+    {
+      "src": "/somluul_logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/somluul_logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#141b2d",
+  "theme_color": "#141b2d",
+  "display": "standalone",
+  "orientation": "portrait"
+}

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      // Suppress benign Vite websocket/HMR connection errors in sandboxed preview frames
+      (function() {
+        const isViteWebsocketError = (msg) => {
+          if (!msg) return false;
+          const str = String(msg).toLowerCase();
+          return str.includes('vite') || str.includes('websocket') || str.includes('web socket') || str.includes('failed to connect');
+        };
+
+        const originalConsoleError = console.error;
+        console.error = function(...args) {
+          if (args[0] && isViteWebsocketError(args[0])) {
+            return;
+          }
+          originalConsoleError.apply(console, args);
+        };
+
+        window.addEventListener('error', function(event) {
+          if (event && (isViteWebsocketError(event.message) || isViteWebsocketError(event.filename))) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event && event.reason) {
+            const reasonStr = String(event.reason.message || event.reason).toLowerCase();
+            if (isViteWebsocketError(reasonStr)) {
+              event.preventDefault();
+              event.stopPropagation();
+              event.stopImmediatePropagation();
+            }
+          }
+        }, true);
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SomLuul</title>
+    <!-- PWA configuration -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#141b2d" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="SomLuul" />
+    
+    <!-- Apple Touch Icons for iOS Devices -->
+    <link rel="apple-touch-icon" href="/somluul_logo.png" />
+    
+    <!-- Standard Favicons for All Platforms -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/somluul_logo.svg" />
+    <link rel="icon" type="image/png" href="/somluul_logo.png" />
+    <link rel="shortcut icon" href="/favicon.svg" />
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('ServiceWorker registered:', reg.scope))
+            .catch(err => console.log('ServiceWorker registration failed:', err));
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
