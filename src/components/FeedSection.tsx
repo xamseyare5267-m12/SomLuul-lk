@@ -675,9 +675,9 @@ export const FeedSection: React.FC<FeedSectionProps> = ({
     if (!sharingPost) return;
 
     if (option === 'copy') {
-      const postUrl = `https://somluul.com/posts/${sharingPost.id}`;
+      const postUrl = `${window.location.origin}/#post-${sharingPost.id}`;
       navigator.clipboard.writeText(postUrl);
-      if (onShowToast) onShowToast('Link-ga qoraalka waa la koobiyeeyay!', 'success');
+      if (onShowToast) onShowToast('Link-ga rasmiga ah ee qoraalka waa la koobiyeeyay!', 'success');
     } else if (option === 'timeline') {
       // Simulate timeline share
       const newSharedPost: Post = {

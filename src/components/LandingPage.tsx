@@ -371,8 +371,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenAuth, appLogo })
                 </div>
               </button>
 
-              {/* Windows Web Buttons */}
-              <div className="w-full sm:w-auto flex gap-3 justify-center">
+              {/* Windows, Web & Share Buttons */}
+              <div className="w-full sm:w-auto flex flex-wrap gap-2.5 justify-center">
                 <button 
                   onClick={() => triggerFileDownload('SomLuul_Desktop_Launcher.bat')}
                   className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-3 bg-gray-800/40 hover:bg-gray-800 text-xs font-bold text-gray-300 rounded-xl border border-gray-700/50 transition-all cursor-pointer"
@@ -386,7 +386,27 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenAuth, appLogo })
                   className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-purple-600/90 to-blue-600/90 hover:from-purple-600 hover:to-blue-600 text-xs font-bold text-white rounded-xl shadow-md cursor-pointer"
                 >
                   <Globe size={14} className="text-cyan-300" />
-                  <span>Web Version</span>
+                  <span>Web Version (Direct)</span>
+                </button>
+
+                <button 
+                  onClick={() => {
+                    const currentWebUrl = window.location.origin;
+                    if (navigator.share) {
+                      navigator.share({
+                        title: 'SomLuul Web App',
+                        text: 'Ka isticmaal SomLuul toos mareegta (Web App-ka) ama ka soo deji app-ka rasmiga ah!',
+                        url: currentWebUrl
+                      }).catch(() => {});
+                    } else {
+                      navigator.clipboard.writeText(currentWebUrl);
+                      alert('Link-ga rasmiga ah ee Web App-ka SomLuul waa la koobiyeeyay! U dir asxaabtaada.');
+                    }
+                  }}
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-3 bg-emerald-600/20 hover:bg-emerald-600/30 text-xs font-bold text-emerald-300 rounded-xl border border-emerald-500/30 transition-all cursor-pointer"
+                >
+                  <Share2 size={14} className="text-emerald-400" />
+                  <span>Wadaag Web Link</span>
                 </button>
               </div>
             </div>

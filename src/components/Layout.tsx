@@ -7,7 +7,7 @@ import {
   RefreshCw, CheckCircle2, ShieldCheck, Mail, Edit3, Save, AlertCircle, Download,
   Globe, Compass, MessageSquare, ShoppingBag, DollarSign, HelpCircle, ChevronDown,
   Crown, Megaphone, Search, Home, Tv, Users, Bell, Grid, Clock, ChevronUp, Settings,
-  MoreHorizontal, Plus
+  MoreHorizontal, Plus, Share2
 } from 'lucide-react';
 import { Profile } from '../types.js';
 import { useTheme } from './ThemeContext.js';
@@ -883,6 +883,29 @@ export const Layout: React.FC<LayoutProps> = ({
               </div>
             )}
           </div>
+
+          {/* Share Web App Link Button */}
+          <button
+            onClick={() => {
+              const currentWebUrl = window.location.origin;
+              if (navigator.share) {
+                navigator.share({
+                  title: 'SomLuul Web App',
+                  text: 'Ka isticmaal SomLuul toos mareegta (Web App-ka) ama ka soo deji app-ka rasmiga ah!',
+                  url: currentWebUrl
+                }).catch(() => {});
+              } else {
+                navigator.clipboard.writeText(currentWebUrl);
+                onShowToast('Link-ga rasmiga ah ee Web App-ka SomLuul waa la koobiyeeyay! U dir asxaabtaada.', 'success');
+              }
+            }}
+            className="w-7.5 h-7.5 sm:w-auto sm:px-2.5 p-1 text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 rounded-full transition-colors cursor-pointer flex items-center justify-center gap-1 shrink-0"
+            title="Wadaag Link-ga Web-ka"
+          >
+            <Share2 size={13} className="sm:hidden" />
+            <Share2 size={14} className="hidden sm:block" />
+            <span className="text-[10px] font-black hidden lg:inline">Wadaag Web-ka</span>
+          </button>
 
           {/* Quick Direct Download Button with dropdown */}
           <div className="relative shrink-0">
