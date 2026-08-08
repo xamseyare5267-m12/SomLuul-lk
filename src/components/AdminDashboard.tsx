@@ -385,7 +385,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-3">
                             <div className="w-9 h-9 rounded-full bg-blue-50 dark:bg-[#1f293d] text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold font-sans">
-                              {user.first_name[0]}{user.last_name[0]}
+                              {(user.first_name?.[0] || 'U')}{(user.last_name?.[0] || '')}
                             </div>
                             <div>
                               <p className="font-semibold text-gray-950 dark:text-white">

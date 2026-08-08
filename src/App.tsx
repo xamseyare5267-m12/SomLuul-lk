@@ -383,7 +383,7 @@ export default function App() {
                           <img src={session.user.avatar} alt="User" className="w-full h-full object-cover rounded-full" />
                         ) : (
                           <div className="w-full h-full rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">
-                            {session.user.first_name[0]}{session.user.last_name[0]}
+                            {(session.user?.first_name?.[0] || 'S')}{(session.user?.last_name?.[0] || 'L')}
                           </div>
                         )}
                       </div>
