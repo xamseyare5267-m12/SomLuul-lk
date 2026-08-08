@@ -31,8 +31,8 @@ import {
   generateId,
   syncDbFromSupabase,
   syncDbToSupabase
-} from './src/server/db.js';
-import { FileMetadata, Profile, Post } from './src/types.js';
+} from './src/server/db';
+import { FileMetadata, Profile, Post } from './src/types';
 import {
   checkPrinterOnline,
   sendPrintJobWithRetry,
@@ -40,7 +40,7 @@ import {
   savePrinterConfig,
   getPrinterLogsAndAlerts,
   clearPrinterLogsAndAlerts
-} from './src/server/printer.js';
+} from './src/server/printer';
 
 // Extend Express Request type to include authenticated user details
 interface AuthenticatedRequest extends Request {

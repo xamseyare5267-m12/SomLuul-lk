@@ -3,7 +3,7 @@ import path from 'path';
 import bcrypt from 'bcryptjs';
 import axios from 'axios';
 import { Storage } from '@google-cloud/storage';
-import { Profile, FileMetadata, UserRole, UserStats, AdminStats, Post, ActivityLog, Story, AppNotification, ChatRoom, ChatMessage } from '../types.js';
+import { Profile, FileMetadata, UserRole, UserStats, AdminStats, Post, ActivityLog, Story, AppNotification, ChatRoom, ChatMessage } from '../types';
 
 let gcsStorageForDb: any = null;
 let gcsBucketForDb: any = null;
